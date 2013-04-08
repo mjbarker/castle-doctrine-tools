@@ -54,4 +54,4 @@ class Map():
         self.cells[(x, y)] = cell_type
 
     def getCell(self, x, y):
-        return self.cells[(x, y)]
+        return self.cells.has_key((x, y)) and self.cells[(x, y)] or Cell.blank
