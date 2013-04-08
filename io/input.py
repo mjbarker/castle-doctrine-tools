@@ -1,12 +1,16 @@
+import sys
 
 class FileInput:
     '''
     Input stream from a file.
     '''
 
-    def __init__(self, filename):
+    def __init__(self, filename = ''):
         self.filename = filename
-        self.file = open(filename, 'r')
+        if filename == '':
+            self.file = sys.stdin
+        else:
+            self.file = open(filename, 'r')
         self.at_eof = False
 
     def eof(self):
