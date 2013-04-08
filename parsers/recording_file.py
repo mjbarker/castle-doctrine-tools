@@ -54,6 +54,7 @@ class RecordingFileMapParser:
         self.input = input_stream
    
     def parse(self, map_data):
+        success = False
         try:
             x = 0
             y = map_data.height - 1
@@ -80,8 +81,11 @@ class RecordingFileMapParser:
                     if y < 0:
                         #print 'Finished reading map'
                         reading = False
+                        success = True
                         break
                 if reading:
                     line = self.input.readline()
         except:
             raise
+        finally:
+            return success

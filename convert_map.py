@@ -72,18 +72,23 @@ def main():
 
     parser = [parser.parser(input) for parser in supported_parser_list if parser.name == input_format][0]
 
-    parsed_map = core.map.Map()
-    try:
-        parser.parse(parsed_map)
-
-        writer_list = []
-        for format in output_formats:
-            writer_list += [writer.writer() for writer in supported_writer_list if writer.name == format]
-        for writer in writer_list:
-            writer.write(parsed_map)
-        
-    except parsers.recording_file.ParseError as e:
-        print 'Failed to parse file:', e.message
+    converting = True
+    while converting:
+        parsed_map = core.map.Map()
+        try:
+            parsed = parser.parse(parsed_map)
+    
+            if parsed:
+                writer_list = []
+                for format in output_formats:
+                    writer_list += [writer.writer() for writer in supported_writer_list if writer.name == format]
+                for writer in writer_list:
+                    writer.write(parsed_map)
+                
+        except parsers.recording_file.ParseError as e:
+            print 'Failed to parse file:', e.message
+            
+        converting = not input.eof()
         
 if __name__ == '__main__':
     main()
