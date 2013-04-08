@@ -69,6 +69,7 @@ def main():
         input = io.input.FileInput(options.input_filename)
     except:
         print 'Could not open: \'' + options.input_filename + '\''
+        return
 
     parser = [parser.parser(input) for parser in supported_parser_list if parser.name == input_format][0]
 
