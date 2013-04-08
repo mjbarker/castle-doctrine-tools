@@ -62,7 +62,7 @@ class RecordingFileMapParser:
             line = self.input.readline()
             while reading and not self.input.eof():
                 tokens = line.split('#')
-                print tokens
+                #print tokens
                 for token in tokens:
                     try:
                         # MJB TODO: For now, ignore statuses, just get the tile.
@@ -78,10 +78,10 @@ class RecordingFileMapParser:
                         x = 0
                         y = y - 1
                     if y < 0:
-                        print 'Finished reading map'
+                        #print 'Finished reading map'
                         reading = False
                         break
                 if reading:
                     line = self.input.readline()
         except:
-            raise ParseError
+            raise
